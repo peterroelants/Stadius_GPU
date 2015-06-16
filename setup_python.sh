@@ -15,6 +15,20 @@ lspci | grep -i NVIDIA
 printf '\nRun nvidia-smi:\n'
 nvidia-smi
 
+# Add CUDA to the LD_LIBRARY_PATH
+if ! [[ :$LD_LIBRARY_PATH: == *:"/usr/local/cuda/lib64":* ]] ; then
+	printf 'Add cuda LD_LIBRARY_PATH to .bashrc\n'
+    echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH'  >> $HOME/.bashrc
+    source $HOME/.bashrc # Load the update .bashrc file
+fi
+
+# Add CUDA to the PATH
+if ! [[ :$PATH: == *:"/usr/local/cuda/bin":* ]] ; then
+	printf 'Add cuda PATH to .bashrc\n'
+    echo 'export PATH=$PATH:/usr/local/cuda/bin'  >> $HOME/.bashrc
+    source $HOME/.bashrc # Load the update .bashrc file
+fi
+
 
 #########################
 # Install Anaconda base #
@@ -33,7 +47,7 @@ wget --quiet https://repo.continuum.io/miniconda/$miniconda  # download script
 # Use -b to run install in batch mode.
 bash $miniconda -b
 
-# Add Anaconda to the .bashrc path
+# Add Anaconda to the PATH
 if ! [[ :$PATH: == *"$HOME/miniconda/bin":* ]] ; then
 	printf 'add Path to .bashrc\n'
     echo 'export PATH=$HOME/miniconda/bin:$PATH'  >> ~/.bashrc
@@ -67,6 +81,7 @@ yes | conda install theano  # Theano CPU/GPU computations
 # Config and check Theano #
 ###########################
 printf '\nConfigure and check Theano\n'
+source ~/.bashrc # Load the lastest .bashrc file
 # Copy theanorc to home folder
 yes | cp -f theanorc $HOME/.theanorc
 # Run theano test
