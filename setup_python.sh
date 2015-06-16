@@ -5,34 +5,12 @@
 #  and has most of the libraries you need.
 # More info: https://store.continuum.io/cshop/anaconda/
 
-########################
-# Config and check GPU #
-########################
+##########################
+# Install Anaconda base  #
+##########################
+# Load the latest bash file
+source $HOME/.bashrc
 
-printf 'Check 3D controller:\n'
-lspci | grep -i NVIDIA
-
-printf '\nRun nvidia-smi:\n'
-nvidia-smi
-
-# Add CUDA to the LD_LIBRARY_PATH
-if ! [[ :$LD_LIBRARY_PATH: == *:"/usr/local/cuda/lib64":* ]] ; then
-	printf 'Add cuda LD_LIBRARY_PATH to .bashrc\n'
-    echo 'export LD_LIBRARY_PATH=/usr/local/cuda/lib64:$LD_LIBRARY_PATH'  >> $HOME/.bashrc
-    source $HOME/.bashrc # Load the update .bashrc file
-fi
-
-# Add CUDA to the PATH
-if ! [[ :$PATH: == *:"/usr/local/cuda/bin":* ]] ; then
-	printf 'Add cuda PATH to .bashrc\n'
-    echo 'export PATH=$PATH:/usr/local/cuda/bin'  >> $HOME/.bashrc
-    source $HOME/.bashrc # Load the update .bashrc file
-fi
-
-
-#########################
-# Install Anaconda base #
-#########################
 printf '\nStart installing Anaconda Python\n'
 # Get the anaconda install script via 'wget' from the anaconda download page.
 # To install the full anaconda distribution uncomment the next line:
@@ -54,35 +32,6 @@ if ! [[ :$PATH: == *"$HOME/miniconda/bin":* ]] ; then
     source ~/.bashrc # Load the update .bashrc file
 fi
 
-
-########################################
-# Install Anaconda packages and Theano #
-########################################
-printf '\nStart installing Theano and other packages\n'
-# use linux 'yes' command to force yes
 # Update anaconda to the latest version
+# use linux 'yes' command to force yes
 yes | conda update conda
-
-# Install Python libraries
-yes | conda install pip  # Python package manager
-# Computation deps
-yes | conda install numpy  # Python C vectors and computations
-yes | conda install scipy  # Scientific package
-yes | conda install scikit-learn  # Machine learning package
-yes | conda install pandas  # Data structure and statistics package
-# Interaction and plotting deps
-yes | conda install matplotlib  # Plotting package
-yes | conda install ipython  # Interactive Python sessions
-yes | conda install ipython-notebook  # Python notebooks
-# Theano 
-yes | conda install theano  # Theano CPU/GPU computations
-
-###########################
-# Config and check Theano #
-###########################
-printf '\nConfigure and check Theano\n'
-source ~/.bashrc # Load the lastest .bashrc file
-# Copy theanorc to home folder
-yes | cp -f theanorc $HOME/.theanorc
-# Run theano test
-bash test_theano.sh
