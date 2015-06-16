@@ -33,3 +33,8 @@ host1=username@login_node.com
 
 
 ssh -A -t -L 7777:localhost:7777 proelant@ssh.esat.kuleuven.be ssh -A -t -L 7777:localhost:7777 -N sista-nc-3
+
+
+
+
+https://developer.nvidia.com/how-to-cuda-python
