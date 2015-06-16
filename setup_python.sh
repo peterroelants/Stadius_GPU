@@ -9,18 +9,17 @@
 # Config and check GPU #
 ########################
 
-echo 'Check 3D controller:'
+printf 'Check 3D controller:\n'
 lspci | grep -i NVIDIA
 
-echo '\nRun nvidia-smi:'
+printf '\nRun nvidia-smi:\n'
 nvidia-smi
-
 
 
 #########################
 # Install Anaconda base #
 #########################
-echo '\nStart installing Anaconda Python'
+printf '\nStart installing Anaconda Python\n'
 # Get the anaconda install script via 'wget' from the anaconda download page.
 # To install the full anaconda distribution uncomment the next line:
 # wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.2.0-Linux-x86_64.sh
@@ -35,14 +34,17 @@ wget --quiet https://repo.continuum.io/miniconda/$miniconda  # download script
 bash $miniconda -b
 
 # Add Anaconda to the .bashrc path
-echo 'export PATH=$HOME/miniconda//bin:$PATH'  >> ~/.bashrc
-# Load the update .bashrc file
-source ~/.bashrc
+if ! [[ :$PATH: == *"$HOME/miniconda/bin":* ]] ; then
+	printf 'add Path to .bashrc\n'
+    echo 'export PATH=$HOME/miniconda/bin:$PATH'  >> ~/.bashrc
+    source ~/.bashrc # Load the update .bashrc file
+fi
+
 
 ########################################
 # Install Anaconda packages and Theano #
 ########################################
-echo '\nStart installing Theano and other packages'
+printf '\nStart installing Theano and other packages\n'
 # use linux 'yes' command to force yes
 # Update anaconda to the latest version
 yes | conda update conda
@@ -64,8 +66,8 @@ yes | conda install theano  # Theano CPU/GPU computations
 ###########################
 # Config and check Theano #
 ###########################
-echo '\nConfigure and check Theano'
+printf '\nConfigure and check Theano\n'
 # Copy theanorc to home folder
-cp -f theanorc $HOME/.theanorc
+yes | cp -f theanorc $HOME/.theanorc
 # Run theano test
 bash test_theano.sh
