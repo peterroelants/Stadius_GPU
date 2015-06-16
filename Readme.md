@@ -1,38 +1,93 @@
-# SSH tunneling through gateway (multi-hop)
+# How to use the Stadius GPU
 
-* http://sshmenu.sourceforge.net/articles/transparent-mulithop.html
-$ http://superuser.com/questions/96489/ssh-tunnel-via-multiple-hops
-* http://tom.scogland.com/blog/2012/07/04/ssh-tricks/
-* http://www.g-loaded.eu/2006/11/24/auto-closing-ssh-tunnels/
-* http://blog.trackets.com/2014/05/17/ssh-tunnel-local-and-remote-port-forwarding-explained-with-examples.html
-* https://gist.github.com/scy/6781836
-* https://en.wikibooks.org/wiki/OpenSSH/Cookbook/Proxies_and_Jump_Hosts
+The Stadius sista-nc-3 server has a [Tesla K40 GPU](http://www.nvidia.com/content/PDF/kepler/Tesla-K40-PCIe-Passive-Board-Spec-BD-06902-001_v05.pdf) donated by NVIDIA that can be used by researchers in the [Stadius](http://www.esat.kuleuven.be/stadius/) research group. This Github page will explain how to use this GPU via libraries such as [Theano](http://deeplearning.net/software/theano/), and will give you pointers where and how to learn more about GPU programming.
 
-ssh -A -t ruapehu.example.com ssh -A -t aoraki ssh -A tongariro
+## Setup Anaconda Python and Theano
 
-ssh proelant@sista-nc-3
-ssh proelant@ssh.esat.kuleuven.be
+To set up the [Anaconda Python](https://store.continuum.io/cshop/anaconda/) distribution in your home directory and install the [Theano](http://deeplearning.net/software/theano/) library you can follow the following steps (please read through this full section before executing the steps.)
 
+Login to the sista-nc-3 server with your Stadius account by executing the following command in your shell (be sure that [SSH](http://unixhelp.ed.ac.uk/CGI/man-cgi?ssh+1) is installed and configured, if you don't know how to do this, ask your nearest colleague):
 
-ssh -A -t proelant@ssh.esat.kuleuven.be ssh -A -t sista-nc-3
+    ssh -A -t <user_name>@ssh.esat.kuleuven.be ssh -A -t sista-nc-3
 
+With `<user_name>` your user name. This might ask you password corresponding to your user name.  
+Then download this Github repository via git by running the following command on the server side terminal (the one you just logged into):
 
-# Access IPython notebook over SSH
+    git clone https://github.com/peterroelants/Stadius_GPU.git
 
-* http://wisdomthroughknowledge.blogspot.com/2012/07/accessing-ipython-notebook-remotely.html
-* https://coderwall.com/p/ohk6cg/remote-access-to-ipython-notebooks-via-ssh
-* http://www.hydro.washington.edu/~jhamman/hydro-logic/blog/2013/10/04/pybook-remote/
-* http://stackoverflow.com/questions/22518489/using-ipython-notebook-remotely-by-ssh-twice
+Go to the `Stadius_GPU` directory that is just created by:
 
-host1=username@login_node.com
-  host2=username@dest.ination.com
-  ssh -L 7777:localhost:7777 $host1 ssh -L 7777:localhost:7777 -N $host2
+    cd Stadius_GPU/
+
+And run the install script to configure the GPU, install Anaconda and Theano by:
+
+    bash setup_all.sh
+
+See The section below if you already have Anaconda Python installed.  
+If everything went well then the script ends by testing Theano on the GPU and the final line should read `Used the gpu`. To continue, either run `source ~/.bashrc` to update your current terminal, or restart your SSH session by entering `exit` and restart the connection by the above SSH command.
 
 
+### Anaconda Python is already installed
+If you have Anaconda Python already installed you can either remove your previous installation and run the `setup_all.sh` script as above. Or you can configure the GPU by running the following from the `Stadius_GPU` directory:
+
+    bash setup_GPU.sh
+    source ~/.bashrc
+    bash setup_theano.sh
+
+### Explanation of the above commands
+
+The `ssh -A -t <user_name>@ssh.esat.kuleuven.be ssh -A -t sista-nc-3` command  will create a [multi-hop](http://sshmenu.sourceforge.net/articles/transparent-mulithop.html) SSH connection to `sista-nc-3` by first going through the `ssh.esat.kuleuven.be` login server. The `-A` option forwards your user name to `sista-nc-3` via `ssh.esat.kuleuven.be` without needing it again. The `-t` option forces to open a terminal on `sista-nc-3`. The result of this command will be the same as first running `ssh <user_name>@ssh.esat.kuleuven.be` and then `ssh <user_name>@sista-nc-3`.
+
+`git clone https://github.com/peterroelants/Stadius_GPU.git` Uses [Git](https://git-scm.com/)'s' [clone](http://git-scm.com/docs/git-clone) command to download the necessary files in [https://github.com/peterroelants/Stadius_GPU](https://github.com/peterroelants/Stadius_GPU).
+
+`bash <script_name>` runs the script with `<script_name>`, the source of these scrips should be documented and self explaining.
+
+`source ~/.bashrc` runs your [`.bashrc`](http://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html) confige file to update your current session with the changes made by the install. The install adds some configuration lines to your .bashrc file.
 
 
+## Start a notebook that is accessible from your local machine
 
-ssh -A -t -L 7777:localhost:7777 proelant@ssh.esat.kuleuven.be ssh -A -t -L 7777:localhost:7777 -N sista-nc-3
+If you want to run you files directly on the server by copying them via [`scp`](http://www.hypexr.org/linux_scp_help.php) or [FTP](https://en.wikipedia.org/wiki/File_Transfer_Protocol) and editing them via [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)), [Nano](https://en.wikipedia.org/wiki/GNU_nano), or [Emacs](http://www.gnu.org/software/emacs/). But we provide an easier option to run your code via [IPython notebooks](http://ipython.org/notebook.html). 
+
+You can start an IPython notebook on the remote sista-nc-3 server and tunnel it to the `<port_number>` of the local host via:
+
+    bash run_notebook.sh <user_name> <port_number> 
+
+With `<port_number>` the port used to host the notebook on the remote server, and for the tunnel on the login server, and to receive the incoming stream on the current localhost. This script is self documented, feel free to go over the code for more information.
+
+You can then go to `http://localhost:<port_number>/` in your local browser to start working on the IPython notebooks.
+
+Close the terminal where you ran the `run_notebook.sh` script via ctrl-C and enter `y` if needed to close the IPython notebook and tunnel.
+
+
+### Debugging
+
+Sometimes it is the case that an SSH connection doesn't close well, and is still running in the background, a process fails, or a port is in use. We will list a few commands that might be useful for debugging purposes.
+
+These debugging commands can be useful on the local host as well as on the remote hosts. Run `ssh <user_name>@ssh.esat.kuleuven.be`, with `<user_name>` your user name, to log in to the gateway node, and run `ssh <user_name>@sista-nc-3` on the gateway node to log in on the sista-nc-3 server.
+
+#### Debugging: listing all processing belonging to the current user
+
+The [ps](http://www.westwind.com/reference/os-x/commandline/admin.html) command can be used to list processes running on the system. The list of processes belonging to the current user (you) can be found with.
+
+    ps -x
+
+And the list of all SSH processes belonging to the current user can be get with:
+
+    ps -x | grep ssh
+
+Where `|` creates a ['pipe'](http://www.linfo.org/pipes.html) that sends the output to the [grep](http://unixhelp.ed.ac.uk/CGI/man-cgi?grep) command that can extract and print the lines that contain a certain pattern (here the pattern is `ssh`). Thus for example `ps -x | grep python` can be used to list all Python processes by the current user.
+
+The first column is the [process identification number](http://www.linfo.org/pid.html) (pid) which can be used to target the process in a `kill` command.
+
+#### Debugging: killing processes
+
+If you want to kill one of your processes then you can do this via the [kill](http://linux.die.net/man/1/kill) command:
+
+    kill -9 <pid>
+
+With `<pid>` the [process identification number](https://www.digitalocean.com/community/tutorials/how-to-use-ps-kill-and-nice-to-manage-processes-in-linux) (see above on how to get this).
+
 
 
 
@@ -40,14 +95,14 @@ ssh -A -t -L 7777:localhost:7777 proelant@ssh.esat.kuleuven.be ssh -A -t -L 7777
 https://developer.nvidia.com/how-to-cuda-python
 
 
-git clone https://github.com/peterroelants/Stadius_GPU.git
 
 
 
+ssh -M -S nb-ctrl-socket -A -f -L 7777:localhost:7777 proelant@ssh.esat.kuleuven.be ssh -A -L 7777:localhost:7777 -N sista-nc-3
 
-export PATH=/users/sista/proelant/anaconda/bin:$PATH:/usr/local/cuda-6.5/bin:$PATH
+ssh -S nb-ctrl-socket -O check proelant@ssh.esat.kuleuven.be
+ssh -S nb-ctrl-socket -O check proelant@sista-nc-3
 
-export LD_LIBRARY_PATH=/usr/local/cuda-6.5/lib64:$LD_LIBRARY_PATH
+ssh -S nb-ctrl-socket -O exit proelant@ssh.esat.kuleuven.be
+ssh -S nb-ctrl-socket -O exit proelant@sista-nc-3
 
-# added by Anaconda 2.2.0 installer
-export PATH="/users/sista/proelant/anaconda/bin:$PATH"

@@ -2,9 +2,15 @@
 
 # Script to setup Anaconda python from the local host
 
-# Check if the file is passed as argument
+# Check if the port number is passed as argument
 if [ "$1" == "" ]; then
-    echo "Stadius user name expected as input"
+    echo "Port number expected as input"
+    exit 2
+fi
+
+# Check if a title for the front matter is passed as an argument
+if [ "$2" == "" ]; then
+    echo "You should provide a title as second argument"
     exit 2
 fi
 
