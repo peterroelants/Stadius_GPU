@@ -38,3 +38,6 @@ ssh -A -t -L 7777:localhost:7777 proelant@ssh.esat.kuleuven.be ssh -A -t -L 7777
 
 
 https://developer.nvidia.com/how-to-cuda-python
+
+
+git clone https://github.com/peterroelants/Stadius_GPU.git
