@@ -41,3 +41,13 @@ https://developer.nvidia.com/how-to-cuda-python
 
 
 git clone https://github.com/peterroelants/Stadius_GPU.git
+
+
+
+
+export PATH=/users/sista/proelant/anaconda/bin:$PATH:/usr/local/cuda-6.5/bin:$PATH
+
+export LD_LIBRARY_PATH=/usr/local/cuda-6.5/lib64:$LD_LIBRARY_PATH
+
+# added by Anaconda 2.2.0 installer
+export PATH="/users/sista/proelant/anaconda/bin:$PATH"
