@@ -21,4 +21,4 @@ wget --quiet https://repo.continuum.io/miniconda/$miniconda
 # Note that if you update the link above to a newer Anaconda version, you 
 #  should also update this file.
 # Use -b to run install in batch mode
-./$miniconda -b
+bash $miniconda -b
