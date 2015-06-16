@@ -14,7 +14,7 @@
 
 # Only install Miniconda to avoid overhead of unused libraries
 # Miniconda url: http://conda.pydata.org/miniconda
-miniconda=Miniconda-2.2.2-Linux-x86_64.sh
+miniconda=Miniconda-latest-Linux-x86_64.sh
 wget --quiet https://repo.continuum.io/miniconda/$miniconda
 
 # Install Miniconda via the downloaded script
