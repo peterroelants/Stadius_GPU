@@ -9,9 +9,16 @@
 # Note: To install a newer version of Anaconda Python, find the new download 
 #  link at http://continuum.io/downloads . If you update this link, you should
 #  also update the reference to the file below.
-wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.2.0-Linux-x86_64.sh
+# To install the full anaconda distribution uncomment the next line
+# wget https://3230d63b5fc54e62148e-c95ac804525aac4b6dba79b00b39d1d3.ssl.cf1.rackcdn.com/Anaconda-2.2.0-Linux-x86_64.sh
 
-# Install Anaconda via the downloaded script
+# Only install Miniconda to avoid overhead of unused libraries
+# Miniconda url: http://conda.pydata.org/miniconda
+miniconda=Miniconda-2.2.2-Linux-x86_64.sh
+wget --quiet https://repo.continuum.io/miniconda/$miniconda
+
+# Install Miniconda via the downloaded script
 # Note that if you update the link above to a newer Anaconda version, you 
-#  should also update this file
-bash Anaconda-2.2.0-Linux-x86_64.sh
+#  should also update this file.
+# Use -b to run install in batch mode
+./$miniconda -b
