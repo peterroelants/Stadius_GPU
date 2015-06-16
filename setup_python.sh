@@ -18,6 +18,11 @@ wget --quiet https://repo.continuum.io/miniconda/$miniconda  # download script
 # Use -b to run install in batch mode.
 bash $miniconda -b
 
+# Add Anaconda to the .bashrc path
+echo 'export PATH=$HOME/miniconda//bin:$PATH'  >> ~/.bashrc
+# Load the update .bashrc file
+source ~/.bashrc
+
 # Update anaconda to the latest version
 conda update conda
 conda update anaconda
