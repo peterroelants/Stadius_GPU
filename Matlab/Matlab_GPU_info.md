@@ -31,4 +31,4 @@ The speedup in this example is gained by copying the input data to the memory of
 
 Matlab provides an [overview](http://nl.mathworks.com/discovery/matlab-gpu.html) of GPU computing that can be done in Matlab, together with some introductory videos and examples. Many of Matlab's [build-in functions](http://nl.mathworks.com/help/distcomp/run-built-in-functions-on-a-gpu.html) support gpuArray elements.
 
-Another introduction to Matlab GPU programming can be found at: [http://nl.mathworks.com/company/newsletters/articles/gpu-programming-in-matlab.html](http://nl.mathworks.com/company/newsletters/articles/gpu-programming-in-matlab.html)
+Two more introductions to Matlab GPU programming can be found at: [GPU Programming in MATLAB](http://nl.mathworks.com/company/newsletters/articles/gpu-programming-in-matlab.html) and at [Using GPUs in MATLAB](http://blogs.mathworks.com/loren/2012/02/06/using-gpus-in-matlab/).
