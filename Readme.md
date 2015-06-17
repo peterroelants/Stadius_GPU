@@ -2,6 +2,15 @@
 
 The Stadius sista-nc-3 server has a [Tesla K40 GPU](http://www.nvidia.com/content/PDF/kepler/Tesla-K40-PCIe-Passive-Board-Spec-BD-06902-001_v05.pdf) donated by NVIDIA that can be used by researchers in the [Stadius](http://www.esat.kuleuven.be/stadius/) research group. This Github page will explain how to use this GPU via libraries such as [Theano](http://deeplearning.net/software/theano/), and will give you pointers where and how to learn more about GPU programming.
 
+## What is GPU computing
+
+[GPU-accelerated computing](http://www.nvidia.com/object/what-is-gpu-computing.html) is the use of a graphics processing unit (GPU) to accelerate certain computations. GPUs can gain speedups over a CPU because of their highly parallel architecture. The following picture illustrates this difference in parallelization. While a CPU only has a few computational cores, the CPU typically has a few hundred. 
+
+![CPU vs GPU](http://news.cnet.com/i/bto/20090401/nvidia-gpgpu-small.jpg)
+
+While a single GPU core is typically much more limited in what it can do and is much slower than a CPU core, a usage of many cores in parallel can still give certain speedups over sequential CPU programs. The speedup that can be gained is depended on the problem you are trying to solve, if your problem can be parallelized easily your speedups can be huge. If you problem is almost completely sequential, almost no speedups can be made, and your program might even run slower. Typical linear algebra equations are a good candidate to parallelize because of the parallel nature of vector additions and multiplications.
+
+
 ## Setup Anaconda Python and Theano
 
 To set up the [Anaconda Python](https://store.continuum.io/cshop/anaconda/) distribution in your home directory and install the [Theano](http://deeplearning.net/software/theano/) library you can follow the following steps (please read through this full section before executing the steps.)
@@ -89,6 +98,27 @@ If you want to kill one of your processes then you can do this via the [kill](ht
 With `<pid>` the [process identification number](https://www.digitalocean.com/community/tutorials/how-to-use-ps-kill-and-nice-to-manage-processes-in-linux) (see above on how to get this).
 
 
+
+## Using Matlab with GPU on the server
+
+In Stadius the [Matlab](http://nl.mathworks.com/products/matlab/) version comes with the [Parallel Computing Toolbox](http://nl.mathworks.com/products/parallel-computing/). This toolbox allows to use the GPU if there is one available, and since the sista-nc-3 server has one available we can make use of it.
+
+[Learn more about Matlab GPU computing.](http://nl.mathworks.com/discovery/matlab-gpu.html)
+
+
+X = rand(2000,20)*rand(20,5000);
+tic
+opt = statset('Maxiter',1000,'Display','final');
+[W,H] = nnmf(X,5,'options',opt,'algorithm','als');
+toc
+
+
+G = gpuArray(X);
+tic
+opt = statset('Maxiter',1000,'Display','final');
+opt.UseParallel = true;
+[W,H] = nnmf(G,5,'options',opt,'algorithm','als');
+toc
 
 
 

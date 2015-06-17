@@ -9,7 +9,7 @@
 #  <port_number>: The port number used for the tunnels and IPython notebook
 #                 on the local, gateway and remote machines.
 #                 Should be between 1024 and 65535.
-#                 If not provided default port becomes 7878
+#                 If not provided default port becomes 7777
 
 
 # Check if the name  is passed as argument
@@ -21,7 +21,7 @@ fi
 PORTNB=$2
 # Check if the name number is passed as argument
 if [ "$PORTNB" == "" ]; then
-    PORTNB=7878
+    PORTNB=7777
 fi
 
 # Create a tunnel and start the IPython notebook
