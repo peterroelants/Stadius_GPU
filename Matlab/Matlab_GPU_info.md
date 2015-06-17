@@ -6,7 +6,7 @@ In Stadius the [Matlab](http://nl.mathworks.com/products/matlab/) version comes 
 
 To run Matlab from the sista-nc-3 server, first login to this server via SSH:
 
-    ssh -AtX <user_name>@ssh.esat.kuleuven.be ssh -AtX sista-nc-3 "matlab -desktop"
+    ssh -AtX <user_name>@ssh.esat.kuleuven.be ssh -AtX sista-nc-3
 
 With `<user_name>` your Stadius user name. the `-X` option of the ssh command should enable [X-window forwarding](http://www.vanemery.com/Linux/XoverSSH/X-over-SSH2.html).
 
@@ -23,7 +23,7 @@ Once you have a Matlab terminal you can run the [`gpuDevice`](http://nl.mathwork
 
 The [Matlab/Mandlebrot_GPU_illustration.m](Mandlebrot_GPU_illustration.m) file in this repository illustrates simple an naive usage and the increase in performance that can be gained. This script is based upon a more extensive illustration of GPU usage: [http://nl.mathworks.com/help/distcomp/examples/illustrating-three-approaches-to-gpu-computing-the-mandelbrot-set.html](http://nl.mathworks.com/help/distcomp/examples/illustrating-three-approaches-to-gpu-computing-the-mandelbrot-set.html). Go over these examples to learn more about GPU usage on Matlab.
 
-You can run this script in Matlab by navigating to the `Stadius_GPU/Matlab/Mandlebrot_GPU_illustration.m` directory in matlab and running the script. You will notice that even a small change in the source can already provide a 10-fold speedup.
+You can run this script in Matlab by navigating to the `Stadius_GPU/Matlab/Mandlebrot_GPU_illustration.m` directory in matlab and running the script. You will notice that even a small change in the source can already provide a 10-fold speedup. Take into account that Matlab may need some time to set up the GPU, so the first time that you run this code the speedup might only be 2-fold.
 
 The speedup in this example is gained by copying the input data to the memory of the GPU with the [`gpuArray`](http://nl.mathworks.com/help/distcomp/gpuarray.html) command. By just copying the data to the GPU's memory it can be run with the help of this GPU. This is only a naive way of speeding up the computation, for better speed improvements please go over the [tutorial on the Matlab website](http://nl.mathworks.com/help/distcomp/examples/illustrating-three-approaches-to-gpu-computing-the-mandelbrot-set.html).
 
