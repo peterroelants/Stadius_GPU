@@ -99,4 +99,4 @@ Next install Anaconda Accelerate by logging into the sista-nc-3 server and runni
 
 ### Run Anaconda Accelerate
 
-You can start a notebook server as was illustrated above. Next you can run [this example notebook](Stadius_GPU/Python/NumbaPro_example.ipynb). By navigating to `Stadius_GPU/Python` and opening the `NumbaPro_example.ipynb` file in the notebook application.
+You can start a notebook server as was illustrated above. Next you can run [this example notebook](NumbaPro_example.ipynb). By navigating to `Stadius_GPU/Python` and opening the `NumbaPro_example.ipynb` file in the notebook application.
