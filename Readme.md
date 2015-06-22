@@ -32,10 +32,10 @@ The `ssh -A -t <user_name>@ssh.esat.kuleuven.be ssh -A -t sista-nc-3` command  w
 
 ## Using Python with GPU on the server
 
-A guide to setup and use Python with the GPU is provided [in this link](Stadius_GPU/Python/readme.md). This tutorial explains how to install [Anaconda Python](https://store.continuum.io/cshop/anaconda/) and [Theano](http://deeplearning.net/software/theano/) in your home directory and set up an [IPython notebook](http://ipython.org/notebook.html) so you can run your programs from the browser on your local machine.
+A guide to setup and use Python with the GPU is provided [in this link](Python/readme.md). This tutorial explains how to install [Anaconda Python](https://store.continuum.io/cshop/anaconda/) and [Theano](http://deeplearning.net/software/theano/) in your home directory and set up an [IPython notebook](http://ipython.org/notebook.html) so you can run your programs from the browser on your local machine.
 
 ## Using Matlab with GPU on the server
 
 In Stadius the [Matlab](http://nl.mathworks.com/products/matlab/) version comes with the [Parallel Computing Toolbox](http://nl.mathworks.com/products/parallel-computing/). This toolbox allows to use the GPU if there is one available, and since the sista-nc-3 server has one available we can make use of it.
 
-A guide to use Matlab with the GPU is provided [in this link](Stadius_GPU/Matlab/readme.md).
+A guide to use Matlab with the GPU is provided [in this link](Matlab/readme.md).
