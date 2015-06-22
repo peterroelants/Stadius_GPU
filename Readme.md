@@ -30,41 +30,12 @@ The `ssh -A -t <user_name>@ssh.esat.kuleuven.be ssh -A -t sista-nc-3` command  w
 `git clone https://github.com/peterroelants/Stadius_GPU.git` Uses [Git](https://git-scm.com/)'s' [clone](http://git-scm.com/docs/git-clone) command to download the necessary files in [https://github.com/peterroelants/Stadius_GPU](https://github.com/peterroelants/Stadius_GPU).
 
 
+## Using Python with GPU on the server
+
+A guide to setup and use Python with the GPU is provided [in this link](Stadius_GPU/Python/readme.md). This tutorial explains how to install [Anaconda Python](https://store.continuum.io/cshop/anaconda/) and [Theano](http://deeplearning.net/software/theano/) in your home directory and set up an [IPython notebook](http://ipython.org/notebook.html) so you can run your programs from the browser on your local machine.
 
 ## Using Matlab with GPU on the server
 
 In Stadius the [Matlab](http://nl.mathworks.com/products/matlab/) version comes with the [Parallel Computing Toolbox](http://nl.mathworks.com/products/parallel-computing/). This toolbox allows to use the GPU if there is one available, and since the sista-nc-3 server has one available we can make use of it.
 
-[Learn more about Matlab GPU computing.](http://nl.mathworks.com/discovery/matlab-gpu.html)
-
-
-X = rand(2000,20)*rand(20,5000);
-tic
-opt = statset('Maxiter',1000,'Display','final');
-[W,H] = nnmf(X,5,'options',opt,'algorithm','als');
-toc
-
-
-G = gpuArray(X);
-tic
-opt = statset('Maxiter',1000,'Display','final');
-opt.UseParallel = true;
-[W,H] = nnmf(G,5,'options',opt,'algorithm','als');
-toc
-
-
-
-https://developer.nvidia.com/how-to-cuda-python
-
-
-
-
-
-ssh -M -S nb-ctrl-socket -A -f -L 7777:localhost:7777 proelant@ssh.esat.kuleuven.be ssh -A -L 7777:localhost:7777 -N sista-nc-3
-
-ssh -S nb-ctrl-socket -O check proelant@ssh.esat.kuleuven.be
-ssh -S nb-ctrl-socket -O check proelant@sista-nc-3
-
-ssh -S nb-ctrl-socket -O exit proelant@ssh.esat.kuleuven.be
-ssh -S nb-ctrl-socket -O exit proelant@sista-nc-3
-
+A guide to use Matlab with the GPU is provided [in this link](Stadius_GPU/Matlab/readme.md).
