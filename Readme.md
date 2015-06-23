@@ -2,6 +2,8 @@
 
 The Stadius sista-nc-3 server has a [Tesla K40 GPU](http://www.nvidia.com/content/PDF/kepler/Tesla-K40-PCIe-Passive-Board-Spec-BD-06902-001_v05.pdf) donated by NVIDIA that can be used by researchers in the [Stadius](http://www.esat.kuleuven.be/stadius/) research group. This Github page will explain how to use this GPU via libraries such as [Theano](http://deeplearning.net/software/theano/), and will give you pointers where and how to learn more about GPU programming.
 
+If you use this GPU for your research you should acknowledge the NVIDIA corporation by mentioning "The Tesla K40 used for this research was donated by the NVIDIA Corporation.".
+
 ## What is GPU computing
 
 [GPU-accelerated computing](http://www.nvidia.com/object/what-is-gpu-computing.html) is the use of a graphics processing unit (GPU) to accelerate certain computations. GPUs can gain speedups over a CPU because of their highly parallel architecture. The following picture illustrates this difference in parallelization. While a CPU only has a few computational cores, the CPU typically has a few hundred. 
@@ -50,3 +52,4 @@ To learn more about GPU programming check out the following 2 online courses:
 
 * [Heterogeneous Parallel Programming](https://www.coursera.org/course/hetero)
 * [Intro to Parallel Programming](https://www.udacity.com/course/intro-to-parallel-programming--cs344)
+
