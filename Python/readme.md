@@ -1,5 +1,6 @@
 # Setup and use Python with the GPU on the server
 
+The beginning of this tutorial will explain how to first set up Anaconda Python with Theano. The end will explain how to set up Anaconda Accelerate (NumbaPro) and request the academic license for this.
 
 ## Setup Anaconda Python and Theano
 
@@ -33,7 +34,7 @@ If you have Anaconda Python already installed you can either remove your previou
 `source ~/.bashrc` runs your [`.bashrc`](http://www.gnu.org/software/bash/manual/html_node/Bash-Startup-Files.html) confige file to update your current session with the changes made by the install. The install adds some configuration lines to your .bashrc file.
 
 
-## Start a notebook that is accessible from your local machine
+## Start a IPython notebook that is accessible from your local machine
 
 If you want to run you files directly on the server by copying them via [`scp`](http://www.hypexr.org/linux_scp_help.php) or [FTP](https://en.wikipedia.org/wiki/File_Transfer_Protocol) and editing them via [Vim](https://en.wikipedia.org/wiki/Vim_(text_editor)), [Nano](https://en.wikipedia.org/wiki/GNU_nano), or [Emacs](http://www.gnu.org/software/emacs/). But we provide an easier option to run your code via [IPython notebooks](http://ipython.org/notebook.html). 
 
@@ -79,6 +80,15 @@ If you want to kill one of your processes then you can do this via the [kill](ht
     kill -9 <pid>
 
 With `<pid>` the [process identification number](https://www.digitalocean.com/community/tutorials/how-to-use-ps-kill-and-nice-to-manage-processes-in-linux) (see above on how to get this).
+
+
+## Use Theano
+
+[Theano](http://deeplearning.net/software/theano/) is a Python library that allows you to define, optimize, and evaluate mathematical expressions involving multi-dimensional arrays efficiently. It became popular because of its usage in deep learning, but can be used in a lot of other applications based on linear algebra.
+
+To learn to use Theano start up an IPython notebook as illustrated above, and go over the [Theano tutorial](http://deeplearning.net/software/theano/tutorial/).
+
+To go deeper into GPU programming with Python please setup and experiment with Anaconda Accelerate as illustrated below.
 
 
 ## Setup Anaconda Accelerate

@@ -14,6 +14,8 @@ While a single GPU core is typically much more limited in what it can do and is 
 
 To set up this tutorial and copy the files you need to your home directory on the server you can follow the following steps.
 
+Windows users can download [Cygwin](https://www.cygwin.com/) together with SSH to use the bash command line functionality on Windows (make sure to select the SSH package [during installation](https://www.youtube.com/watch?v=CwYSvvGaiWU)).
+
 Login to the sista-nc-3 server with your Stadius account by executing the following command in your shell (be sure that [SSH](http://unixhelp.ed.ac.uk/CGI/man-cgi?ssh+1) is installed and configured, if you don't know how to do this, ask your nearest colleague):
 
     ssh -A -t <user_name>@ssh.esat.kuleuven.be ssh -A -t sista-nc-3
@@ -32,10 +34,19 @@ The `ssh -A -t <user_name>@ssh.esat.kuleuven.be ssh -A -t sista-nc-3` command  w
 
 ## Using Python with GPU on the server
 
-A guide to setup and use Python with the GPU is provided [in this link](Python/readme.md). This tutorial explains how to install [Anaconda Python](https://store.continuum.io/cshop/anaconda/) and [Theano](http://deeplearning.net/software/theano/) in your home directory and set up an [IPython notebook](http://ipython.org/notebook.html) so you can run your programs from the browser on your local machine.
+A guide to setup and use Python with the GPU is provided [in this link](Python/readme.md). 
+
+This tutorial explains how to install [Anaconda Python](https://store.continuum.io/cshop/anaconda/) and [Theano](http://deeplearning.net/software/theano/) in your home directory and set up an [IPython notebook](http://ipython.org/notebook.html) so you can run your programs from the browser on your local machine.
 
 ## Using Matlab with GPU on the server
 
 In Stadius the [Matlab](http://nl.mathworks.com/products/matlab/) version comes with the [Parallel Computing Toolbox](http://nl.mathworks.com/products/parallel-computing/). This toolbox allows to use the GPU if there is one available, and since the sista-nc-3 server has one available we can make use of it.
 
 A guide to use Matlab with the GPU is provided [in this link](Matlab/readme.md).
+
+## Learn more about GPU programming:
+
+To learn more about GPU programming check out the following 2 online courses:
+
+* [Heterogeneous Parallel Programming](https://www.coursera.org/course/hetero)
+* [Intro to Parallel Programming](https://www.udacity.com/course/intro-to-parallel-programming--cs344)
